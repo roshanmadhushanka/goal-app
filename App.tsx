@@ -1,21 +1,55 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView, Button } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, SafeAreaView, View, Button, TextInput, Text } from 'react-native';
 
 const App: React.FC = () => {
+  const [goalText, setGoalText] = useState('');
+
+  const goalInputHandler = (inputText: string) => {
+    setGoalText(inputText);
+  }
+
+  const addGoalHandler = () => {
+    console.log(goalText);
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Button title='Tap Me!' />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.textInput} placeholder='Your course goal!' onChangeText={goalInputHandler}/>
+        <Button title='Add Goal' onPress={addGoalHandler}/>
+      </View>
+      <View style={styles.goalsContainer}>
+        <Text>List of goals ... </Text>
+      </View>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
+    paddingHorizontal: 16
   },
+  inputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc'
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    width: '70%',
+    marginRight: 8,
+    padding: 8
+  },
+  goalsContainer: {
+    flex: 4
+  }
 });
 
 export default App;
