@@ -36,7 +36,7 @@ const App: React.FC = () => {
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
       <View style={styles.goalsContainer}>
-        <FlatList data={goals} renderItem={(goal) => <GoalItem goalText={goal.item.text}/>}/>
+        <FlatList data={goals} renderItem={(goal) => <GoalItem key={goal.item.key} goalText={goal.item.text}/>}/>
       </View>
     </View>
   )
