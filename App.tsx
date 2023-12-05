@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, FlatList, View, Button, TextInput, Text } from 'react-native';
+import GoalItem from './component/goalItem.component';
 
 const App: React.FC = () => {
   const [goalText, setGoalText] = useState('');
@@ -20,16 +21,6 @@ const App: React.FC = () => {
     setGoals(currentGoals => [...currentGoals, goalText]);
   }
 
-  type GoalProps = {
-    goalText: string
-  }
-
-  const Goal = (props: GoalProps) => (
-    <View style={styles.goalItem}>
-      <Text style={styles.goalText}>{props.goalText}</Text>
-    </View>
-  )
-
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -37,7 +28,7 @@ const App: React.FC = () => {
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
       <View style={styles.goalsContainer}>
-        <FlatList data={goals} renderItem={(goal) => <Goal goalText={goal.item}/>}/>
+        <FlatList data={goals} renderItem={(goal) => <GoalItem goalText={goal.item}/>}/>
       </View>
     </View>
   )
@@ -69,15 +60,6 @@ const styles = StyleSheet.create({
     flex: 4,
     paddingBottom: 50
   },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: '#5e0acc',
-  },
-  goalText: {
-    color: 'white',
-  }
 });
 
 export default App;
