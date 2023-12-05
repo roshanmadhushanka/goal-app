@@ -1,16 +1,34 @@
 import React, {useState} from 'react';
-import { StyleSheet, SafeAreaView, View, Button, TextInput, Text } from 'react-native';
+import { StyleSheet, FlatList, View, Button, TextInput, Text } from 'react-native';
 
 const App: React.FC = () => {
   const [goalText, setGoalText] = useState('');
+  const [goals, setGoals] = useState<string[]>([])
 
   const goalInputHandler = (inputText: string) => {
     setGoalText(inputText);
   }
 
   const addGoalHandler = () => {
-    console.log(goalText);
+    /**
+     * By using the functional form of the state update and spreading the previous state, 
+     * you ensure that you are working with the latest state and avoid potential race conditions. 
+     * This pattern is generally recommended when updating state based on its previous value.
+     * 
+     * This approach is recommended to avoid potential issues related to the asynchronous nature of state updates in React.
+     */
+    setGoals(currentGoals => [...currentGoals, goalText]);
   }
+
+  type GoalProps = {
+    goalText: string
+  }
+
+  const Goal = (props: GoalProps) => (
+    <View style={styles.goalItem}>
+      <Text style={styles.goalText}>{props.goalText}</Text>
+    </View>
+  )
 
   return (
     <View style={styles.container}>
@@ -19,7 +37,7 @@ const App: React.FC = () => {
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
       <View style={styles.goalsContainer}>
-        <Text>List of goals ... </Text>
+        <FlatList data={goals} renderItem={(goal) => <Goal goalText={goal.item}/>}/>
       </View>
     </View>
   )
@@ -48,7 +66,17 @@ const styles = StyleSheet.create({
     padding: 8
   },
   goalsContainer: {
-    flex: 4
+    flex: 4,
+    paddingBottom: 50
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: '#5e0acc',
+  },
+  goalText: {
+    color: 'white',
   }
 });
 
