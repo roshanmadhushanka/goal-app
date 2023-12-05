@@ -47,4 +47,3 @@ export const {addGoal, removeGoal} = goalSlice.actions;
 export const allGoals = (state: RootState) => state.goals.goals;
 
 export default goalSlice.reducer;
-
