@@ -2,9 +2,9 @@ import React from 'react';
 import {Provider} from "react-redux";
 import { StyleSheet, View } from 'react-native';
 import 'react-native-get-random-values';
-import GoalList from './component/goalList.component';
-import AddGoal from './component/addItem.component';
-import {store} from "./redux/store";
+import GoalList from './app/component/goalList.component';
+import AddGoal from './app/component/addItem.component';
+import {store} from "./app/redux/store";
 
 const App: React.FC = () => {
   return (
