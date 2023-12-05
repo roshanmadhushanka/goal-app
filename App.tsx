@@ -5,7 +5,7 @@ import {v4 as uuidv4} from 'uuid';
 import 'react-native-get-random-values';
 
 type Goal = {
-  key: string,
+  id: string,
   text: string,
 }
 
@@ -26,7 +26,7 @@ const App: React.FC = () => {
      * This approach is recommended to avoid potential issues related to the asynchronous nature of state updates in React.
      */
     setGoals(currentGoals => [...currentGoals, 
-      {key: uuidv4(), text: goalText}]);
+      {id: uuidv4(), text: goalText}]);
   }
 
   return (
@@ -36,7 +36,7 @@ const App: React.FC = () => {
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
       <View style={styles.goalsContainer}>
-        <FlatList data={goals} renderItem={(goal) => <GoalItem key={goal.item.key} goalText={goal.item.text}/>}/>
+        <FlatList data={goals} renderItem={(goal) => <GoalItem key={goal.item.id} goalText={goal.item.text}/>} keyExtractor={(item, index) => item.id}/>
       </View>
     </View>
   )
