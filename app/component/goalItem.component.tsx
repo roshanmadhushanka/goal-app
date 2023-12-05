@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 type GoalItemProps = {
-    key: string,
+    id: string,
     goalText: string,
 }
 

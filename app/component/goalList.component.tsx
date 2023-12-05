@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import GoalItem from './goalItem.component';
-import { Goal } from './goal.types';
+import { Goal } from '../redux/goal/goal.slice';
 
 type GoalListProps = {
     goals: Goal[],
@@ -10,7 +10,7 @@ type GoalListProps = {
 const GoalList: React.FC<GoalListProps> = (props: GoalListProps) => {
     return (
         <View style={styles.goalsContainer}>
-            <FlatList data={props.goals} renderItem={(goal) => <GoalItem key={goal.item.id} goalText={goal.item.text}/>} keyExtractor={(item, index) => item.id}/>
+            <FlatList data={props.goals} renderItem={(goal) => <GoalItem id={goal.item.id} goalText={goal.item.text}/>} keyExtractor={(item, index) => item.id}/>
         </View>
     )
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, FlatList, View, Button, TextInput, Text } from 'react-native';
-import GoalList from './component/goalList.component';
-import { Goal } from './component/goal.types';
+import GoalList from './app/component/goalList.component';
+import { Goal } from './app/redux/goal/goal.slice';
 import {v4 as uuidv4} from 'uuid';
 import 'react-native-get-random-values';
 
