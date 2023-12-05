@@ -1,10 +1,17 @@
 import React, {useState} from 'react';
 import { StyleSheet, FlatList, View, Button, TextInput, Text } from 'react-native';
 import GoalItem from './component/goalItem.component';
+import {v4 as uuidv4} from 'uuid';
+import 'react-native-get-random-values';
+
+type Goal = {
+  key: string,
+  text: string,
+}
 
 const App: React.FC = () => {
   const [goalText, setGoalText] = useState('');
-  const [goals, setGoals] = useState<string[]>([])
+  const [goals, setGoals] = useState<Goal[]>([])
 
   const goalInputHandler = (inputText: string) => {
     setGoalText(inputText);
@@ -18,7 +25,8 @@ const App: React.FC = () => {
      * 
      * This approach is recommended to avoid potential issues related to the asynchronous nature of state updates in React.
      */
-    setGoals(currentGoals => [...currentGoals, goalText]);
+    setGoals(currentGoals => [...currentGoals, 
+      {key: uuidv4(), text: goalText}]);
   }
 
   return (
@@ -28,7 +36,7 @@ const App: React.FC = () => {
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
       <View style={styles.goalsContainer}>
-        <FlatList data={goals} renderItem={(goal) => <GoalItem goalText={goal.item}/>}/>
+        <FlatList data={goals} renderItem={(goal) => <GoalItem goalText={goal.item.text}/>}/>
       </View>
     </View>
   )
