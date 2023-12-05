@@ -1,13 +1,9 @@
 import React, {useState} from 'react';
 import { StyleSheet, FlatList, View, Button, TextInput, Text } from 'react-native';
-import GoalItem from './component/goalItem.component';
+import GoalList from './component/goalList.component';
+import { Goal } from './component/goal.types';
 import {v4 as uuidv4} from 'uuid';
 import 'react-native-get-random-values';
-
-type Goal = {
-  id: string,
-  text: string,
-}
 
 const App: React.FC = () => {
   const [goalText, setGoalText] = useState('');
@@ -35,9 +31,7 @@ const App: React.FC = () => {
         <TextInput style={styles.textInput} placeholder='Your course goal!' onChangeText={goalInputHandler}/>
         <Button title='Add Goal' onPress={addGoalHandler}/>
       </View>
-      <View style={styles.goalsContainer}>
-        <FlatList data={goals} renderItem={(goal) => <GoalItem key={goal.item.id} goalText={goal.item.text}/>} keyExtractor={(item, index) => item.id}/>
-      </View>
+      <GoalList goals={goals}/>
     </View>
   )
 }
@@ -63,10 +57,6 @@ const styles = StyleSheet.create({
     width: '70%',
     marginRight: 8,
     padding: 8
-  },
-  goalsContainer: {
-    flex: 4,
-    paddingBottom: 50
   },
 });
 
