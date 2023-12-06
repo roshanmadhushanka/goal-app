@@ -18,23 +18,26 @@ const GoalItem: React.FC<GoalItemProps> = (props: GoalItemProps) => {
     }
 
     return (
-        <Pressable onPress={removeGoalHandler}>
-            <View style={styles.goalItem}>
+        <View style={styles.goalItem}>
+            <Pressable onPress={removeGoalHandler} style={({pressed}) => pressed && styles.pressedItem }>
                 <Text style={styles.goalText}>{props.goalText}</Text>
-            </View>
-        </Pressable>
+            </Pressable>
+        </View>    
     )
 }
 
 const styles = StyleSheet.create({
     goalItem: {
         margin: 8,
-        padding: 8,
         borderRadius: 6,
         backgroundColor: '#5e0acc',
     },
+    pressedItem: {
+        opacity: 0.5,
+    },
     goalText: {
         color: 'white',
+        padding: 8,
     }
 })
 
