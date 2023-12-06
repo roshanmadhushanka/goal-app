@@ -1,5 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
+import { removeGoal } from '../redux/goal/goal.slice';
 
 type GoalItemProps = {
     id: string,
@@ -7,10 +10,19 @@ type GoalItemProps = {
 }
 
 const GoalItem: React.FC<GoalItemProps> = (props: GoalItemProps) => {
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    const removeGoalHandler = () => {
+        dispatch(removeGoal(props.id));
+    }
+
     return (
-        <View style={styles.goalItem}>
-            <Text style={styles.goalText}>{props.goalText}</Text>
-        </View>
+        <Pressable onPress={removeGoalHandler}>
+            <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{props.goalText}</Text>
+            </View>
+        </Pressable>
     )
 }
 
