@@ -1,14 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Button, StyleSheet} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {isAddingGoal, setAddingGoal} from "../redux/goal/goal.slice";
+import {AppDispatch} from "../redux/store";
 import AddGoal from '../component/addItem.component';
 import GoalList from '../component/goalList.component';
 
 const Main: React.FC = () => {
 
-    const [addGoalModalVisible, setAddGoalModalVisible] = useState(false);
+    const dispatch = useDispatch<AppDispatch>();
+    const addGoalModalVisible = useSelector(isAddingGoal).slice();
 
     const handleOnPressAddNewGoal = () => {
-        setAddGoalModalVisible(true);
+        dispatch(setAddingGoal(true));
     }
 
     return (
