@@ -5,7 +5,11 @@ import {v4 as uuidv4} from 'uuid';
 import { AppDispatch } from '../redux/store';
 import { addGoal } from '../redux/goal/goal.slice';
 
-const AddGoal: React.FC = () => {
+interface AddGoalProps {
+    visible: boolean,
+}
+
+const AddGoal: React.FC<AddGoalProps> = (props) => {
     
     const dispatch = useDispatch<AppDispatch>();
     const [goalText, setGoalText] = useState('');
@@ -22,7 +26,7 @@ const AddGoal: React.FC = () => {
     }
 
     return (
-        <Modal>
+        <Modal visible={props.visible} animationType='slide'>
             <View style={styles.inputContainer}>
                 <TextInput style={styles.textInput} placeholder='Your course goal!' onChangeText={goalInputHandler}/>
                 <Button title='Add Goal' onPress={addGoalHandler}/>

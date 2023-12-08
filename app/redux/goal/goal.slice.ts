@@ -10,13 +10,11 @@ export interface Goal {
 // State definition
 export interface GoalState {
     goals: Goal[],
-    addGoalModalVisibility: boolean,
 }
 
 // Initial state
 const initialState: GoalState = {
     goals: [],
-    addGoalModalVisibility: false,
 }
 
 // Reducer functions

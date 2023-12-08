@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {View, Button, StyleSheet} from 'react-native';
 import AddGoal from '../component/addItem.component';
 import GoalList from '../component/goalList.component';
-import {StyleSheet, View} from 'react-native';
 
 const Main: React.FC = () => {
+
+    const [addGoalModalVisible, setAddGoalModalVisible] = useState(false);
+
+    const handleOnPressAddNewGoal = () => {
+        setAddGoalModalVisible(true);
+    }
+
     return (
         <View style={styles.container}>
-            <AddGoal/>
+            <Button title="Add New Goal!" color='#5e0acc' onPress={handleOnPressAddNewGoal} />
+            <AddGoal visible={addGoalModalVisible}/>
             <GoalList/>
         </View>
     )
